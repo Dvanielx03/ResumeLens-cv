@@ -57,10 +57,14 @@ async page => {
     return !barra || barra.getBoundingClientRect().right <= 1;
   });
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),'Desbordamiento horizontal móvil');
+  await page.waitForFunction(() => [...document.querySelectorAll('main p, [data-testid="stColumn"], .rl-score')].every(e => {
+    const rect = e.getBoundingClientRect();
+    return rect.width === 0 || (rect.left >= 0 && rect.right <= innerWidth && e.scrollWidth <= e.clientWidth + 1);
+  }));
   await page.getByText('89%', {exact:true}).scrollIntoViewIfNeeded();
   const caja = await page.getByText('89%', {exact:true}).boundingBox();
   assert(caja && caja.x >= 0 && caja.x + caja.width <= 390, 'Porcentaje recortado en móvil');
-  await page.screenshot({path:'docs/evidencias/04-movil.png',fullPage:true});
+  await page.screenshot({path:'docs/evidencias/04-movil.png',fullPage:true,animations:'disabled'});
   resultados.push('390px: resultado disponible sin desbordamiento horizontal');
   await page.getByRole('button', {name:'Limpiar análisis',exact:true}).click();
   await page.getByRole('heading', {name:'03 · Descubre el ajuste',exact:true}).waitFor();
