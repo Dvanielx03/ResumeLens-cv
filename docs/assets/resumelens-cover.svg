@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="440" viewBox="0 0 1280 440" role="img" aria-labelledby="title desc">
+  <title id="title">ResumeLens — Tu experiencia, puesta en contexto</title>
+  <desc id="desc">Analiza tu CV frente a un puesto con LangChain, evidencia documental y un porcentaje calculado en Python.</desc>
+  <rect width="1280" height="440" fill="#112F27"/>
+  <path d="M0 0H1280V8H0Z" fill="#B9D591"/>
+  <g fill="none" stroke="#6E927C" stroke-width="1"><path d="M72 348H1208M880 60V318"/></g>
+  <text x="72" y="77" fill="#B9D591" font-family="monospace" font-size="15" letter-spacing="4">CV + CONTEXTO → CLARIDAD</text>
+  <text x="65" y="192" fill="#F7F5EF" font-family="Georgia,serif" font-size="108" letter-spacing="-6">ResumeLens</text>
+  <text x="72" y="250" fill="#E0E8DB" font-family="sans-serif" font-size="27">Tu experiencia, puesta en contexto.</text>
+  <text x="72" y="291" fill="#C0D0C1" font-family="sans-serif" font-size="19">Un CV. Un puesto. Evidencia para tu siguiente paso.</text>
+  <g transform="translate(970 83)" fill="none" stroke="#DCE7D5" stroke-width="3">
+    <path d="M0 0H104L148 44V186H0Z"/><path d="M104 0V44H148M25 68H102M25 91H87M25 114H67"/>
+    <circle cx="110" cy="147" r="45" fill="#112F27" stroke="#B9D591" stroke-width="5"/>
+    <path d="M143 180L176 213" stroke="#B9D591" stroke-width="7"/>
+    <path d="M91 148L105 162L132 133" stroke="#B9D591" stroke-width="4"/>
+  </g>
+  <text x="72" y="393" fill="#DCE7D5" font-family="monospace" font-size="15">STREAMLIT / LANGCHAIN / PYDANTIC / DOCKER</text>
+  <text x="1045" y="393" fill="#B9D591" font-family="monospace" font-size="15">01 — MATCH</text>
+</svg>
