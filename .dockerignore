@@ -1,0 +1,16 @@
+.git
+.venv
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+__pycache__
+**/__pycache__
+.pytest_cache
+.ruff_cache
+.playwright-cli
+output
+docs
+node_modules
+test-results
+playwright-report
