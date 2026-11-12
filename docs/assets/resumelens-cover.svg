@@ -1,11 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="240" viewBox="0 0 1280 240" role="img" aria-labelledby="title desc">
   <title id="title">ResumeLens — Tu experiencia, puesta en contexto</title>
   <desc id="desc">Analiza tu CV frente a un puesto con LangChain, evidencia documental y un porcentaje calculado en Python.</desc>
-  <rect width="1280" height="240" fill="#112F27"/>
+  <rect width="1280" height="240" rx="22" fill="#112F27"/>
   <g fill="none" stroke="#B69A65">
-    <rect x="14" y="14" width="1252" height="212" rx="2" stroke-width="1.25"/>
-    <rect x="21" y="21" width="1238" height="198" rx="1" stroke-width="0.75" opacity="0.7"/>
+    <rect x="14" y="14" width="1252" height="212" rx="16" stroke-width="1.25"/>
+    <rect x="21" y="21" width="1238" height="198" rx="11" stroke-width="0.75" opacity="0.7"/>
   </g>
-  <text x="640" y="119" text-anchor="middle" fill="#F7F5EF" font-family="Georgia,serif" font-size="76" letter-spacing="-3">ResumeLens</text>
+  <g transform="translate(390 63)" fill="none" stroke="#B69A65" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-label="Documento con lupa: análisis del CV">
+    <path d="M9 0H37L49 12V52A5 5 0 0 1 44 57H9A5 5 0 0 1 4 52V5A5 5 0 0 1 9 0Z"/>
+    <path d="M36 1V14H48M14 23H34M14 32H27M14 41H22"/>
+    <circle cx="43" cy="44" r="13" fill="#112F27"/>
+    <path d="M52.5 53.5L63 64" stroke-width="3"/>
+  </g>
+  <text x="684" y="119" text-anchor="middle" fill="#F7F5EF" font-family="Georgia,serif" font-size="76" letter-spacing="-3">ResumeLens</text>
   <text x="640" y="168" text-anchor="middle" fill="#C0D0C1" font-family="sans-serif" font-size="20" letter-spacing="1">Tu experiencia, puesta en contexto.</text>
 </svg>
