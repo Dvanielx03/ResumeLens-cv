@@ -2,6 +2,10 @@
   <title id="title">ResumeLens — Tu experiencia, puesta en contexto</title>
   <desc id="desc">Analiza tu CV frente a un puesto con LangChain, evidencia documental y un porcentaje calculado en Python.</desc>
   <rect width="1280" height="240" fill="#112F27"/>
+  <g fill="none" stroke="#B69A65">
+    <rect x="14" y="14" width="1252" height="212" rx="2" stroke-width="1.25"/>
+    <rect x="21" y="21" width="1238" height="198" rx="1" stroke-width="0.75" opacity="0.7"/>
+  </g>
   <text x="640" y="119" text-anchor="middle" fill="#F7F5EF" font-family="Georgia,serif" font-size="76" letter-spacing="-3">ResumeLens</text>
   <text x="640" y="168" text-anchor="middle" fill="#C0D0C1" font-family="sans-serif" font-size="20" letter-spacing="1">Tu experiencia, puesta en contexto.</text>
 </svg>
