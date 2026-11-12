@@ -12,10 +12,13 @@ def generar(destino: Path) -> None:
         comandos += [f"<{linea.encode('cp1252').hex()}> Tj T*"]
     comandos.append("ET")
     contenido = "\n".join(comandos).encode("ascii")
-    objetos = [b"<< /Type /Catalog /Pages 2 0 R >>", b"<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
-               b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>",
-               b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>",
-               f"<< /Length {len(contenido)} >>\nstream\n".encode() + contenido + b"\nendstream"]
+    objetos = [
+        b"<< /Type /Catalog /Pages 2 0 R >>",
+        b"<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+        b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>",
+        b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>",
+        f"<< /Length {len(contenido)} >>\nstream\n".encode() + contenido + b"\nendstream",
+    ]
     pdf = bytearray(b"%PDF-1.4\n")
     offsets = [0]
     for indice, objeto in enumerate(objetos, 1):

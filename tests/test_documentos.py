@@ -13,8 +13,16 @@ def test_extrae_txt_utf8() -> None:
     assert extraer_texto("cv.TXT", texto.encode("utf-8")) == texto.strip()
 
 
-@pytest.mark.parametrize("nombre,datos", [("cv.pdf", b"no es un pdf"), ("cv.txt", b"corto"),
-    ("cv.docx", b"contenido"), ("cv.txt", b"\xff" * 100), ("cv.pdf", b"")])
+@pytest.mark.parametrize(
+    "nombre,datos",
+    [
+        ("cv.pdf", b"no es un pdf"),
+        ("cv.txt", b"corto"),
+        ("cv.docx", b"contenido"),
+        ("cv.txt", b"\xff" * 100),
+        ("cv.pdf", b""),
+    ],
+)
 def test_rechaza_archivos_invalidos(nombre: str, datos: bytes) -> None:
     with pytest.raises(ErrorDocumento):
         extraer_texto(nombre, datos)

@@ -3,18 +3,25 @@
 import pytest
 from pydantic import ValidationError
 
-from app.domain.modelos import AnalisisCV, PESOS
+from app.domain.modelos import PESOS, AnalisisCV
 
 
 def salida(puntos: tuple[int, ...] = (80, 90, 70, 60)) -> dict:
     return {
         "resumen": "El CV aporta evidencia parcial para el puesto solicitado.",
         "criterios": [
-            {"codigo": c, "aplica": True, "puntuacion": p, "requisito": "Desarrollar APIs REST",
-             "justificacion": "Se documenta trabajo relacionado con el requisito.", "evidencias": ["Desarrollo de APIs REST"]}
+            {
+                "codigo": c,
+                "aplica": True,
+                "puntuacion": p,
+                "requisito": "Desarrollar APIs REST",
+                "justificacion": "Se documenta trabajo relacionado con el requisito.",
+                "evidencias": ["Desarrollo de APIs REST"],
+            }
             for c, p in zip(PESOS, puntos)
         ],
-        "fortalezas": ["Experiencia en APIs."], "brechas": ["Faltan métricas de impacto."],
+        "fortalezas": ["Experiencia en APIs."],
+        "brechas": ["Faltan métricas de impacto."],
         "siguientes_pasos": ["Añadir resultados medibles."],
     }
 

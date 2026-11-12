@@ -44,7 +44,11 @@ def _transitorio(error: Exception) -> bool:
     if "perday" in texto or "per day" in texto or "insufficient_quota" in texto:
         return False
     codigo = getattr(error, "status_code", None) or getattr(error, "code", None)
-    return isinstance(error, TimeoutError) or (isinstance(codigo, int) and (codigo == 429 or 500 <= codigo < 600)) or "timeout" in type(error).__name__.lower()
+    return (
+        isinstance(error, TimeoutError)
+        or (isinstance(codigo, int) and (codigo == 429 or 500 <= codigo < 600))
+        or "timeout" in type(error).__name__.lower()
+    )
 
 
 def _normalizar(texto: str) -> str:
@@ -54,7 +58,9 @@ def _normalizar(texto: str) -> str:
 def validar_citas(analisis: AnalisisCV, cv: str) -> AnalisisCV:
     """Exige que cada cita devuelta exista en el documento original."""
     fuente = _normalizar(cv)
-    if any(_normalizar(cita) not in fuente for criterio in analisis.criterios for cita in criterio.evidencias):
+    if any(
+        _normalizar(cita) not in fuente for criterio in analisis.criterios for cita in criterio.evidencias
+    ):
         raise ValueError("El modelo devolvió citas que no existen en el CV.")
     return analisis
 
@@ -62,8 +68,9 @@ def validar_citas(analisis: AnalisisCV, cv: str) -> AnalisisCV:
 class EvaluadorCV:
     """Orquesta la misma cadena estructurada usada en Garaje, adaptada al CV."""
 
-    def __init__(self, modelo: Any, *, timeout: float = LLM_TIMEOUT_S,
-                 esperar: Callable[[float], None] = time.sleep) -> None:
+    def __init__(
+        self, modelo: Any, *, timeout: float = LLM_TIMEOUT_S, esperar: Callable[[float], None] = time.sleep
+    ) -> None:
         self.modelo = modelo.with_structured_output(AnalisisCV)
         self.timeout = timeout
         self.esperar = esperar
@@ -91,15 +98,25 @@ class EvaluadorCV:
                 if isinstance(error, ErrorAnalisis):
                     raise
                 if reparado:
-                    raise ErrorAnalisis("La respuesta del modelo no cumple el contrato o contiene citas no verificables. Reintenta el análisis.") from error
+                    raise ErrorAnalisis(
+                        "La respuesta del modelo no cumple el contrato o contiene citas no verificables. Reintenta el análisis."
+                    ) from error
                 reparado = True
-                prompt = prompt.__class__(messages=[*prompt.to_messages(), HumanMessage(content=
-                    "La salida anterior no cumplió el contrato o sus citas no existen en el CV. "
-                    "Responde de nuevo con exactamente los cuatro criterios y citas literales verificables. "
-                    "No añadas ningún dato que no figure en el documento.")])
+                prompt = prompt.__class__(
+                    messages=[
+                        *prompt.to_messages(),
+                        HumanMessage(
+                            content="La salida anterior no cumplió el contrato o sus citas no existen en el CV. "
+                            "Responde de nuevo con exactamente los cuatro criterios y citas literales verificables. "
+                            "No añadas ningún dato que no figure en el documento."
+                        ),
+                    ]
+                )
             except Exception as error:
                 if _transitorio(error) and reintentos < 2:
-                    self.esperar(2 ** reintentos)
+                    self.esperar(2**reintentos)
                     reintentos += 1
                     continue
-                raise ErrorAnalisis("No se pudo consultar al proveedor. Revisa la clave, el modelo y la cuota disponible. No se generó un resultado alternativo.") from error
+                raise ErrorAnalisis(
+                    "No se pudo consultar al proveedor. Revisa la clave, el modelo y la cuota disponible. No se generó un resultado alternativo."
+                ) from error

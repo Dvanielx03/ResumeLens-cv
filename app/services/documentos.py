@@ -42,7 +42,9 @@ def extraer_texto(nombre: str, contenido: bytes) -> str:
     except ErrorDocumento:
         raise
     except Exception as error:
-        raise ErrorDocumento("No se pudo leer el archivo. Exporta de nuevo el CV como PDF o TXT UTF-8.") from error
+        raise ErrorDocumento(
+            "No se pudo leer el archivo. Exporta de nuevo el CV como PDF o TXT UTF-8."
+        ) from error
     texto = texto.replace("\x00", "").strip()
     if len(texto) < 80:
         raise ErrorDocumento("No hay suficiente texto extraíble. Los PDF escaneados necesitan OCR externo.")

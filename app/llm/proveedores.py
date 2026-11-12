@@ -22,7 +22,9 @@ def crear_modelo(proveedor: str, modelo: str, clave: str = "") -> Any:
     if proveedor == "Google Gemini":
         from langchain_google_genai import ChatGoogleGenerativeAI
 
-        return ChatGoogleGenerativeAI(model=modelo, google_api_key=clave, timeout=LLM_TIMEOUT_S, max_retries=0)
+        return ChatGoogleGenerativeAI(
+            model=modelo, google_api_key=clave, timeout=LLM_TIMEOUT_S, max_retries=0
+        )
     from langchain_openai import ChatOpenAI
 
     return ChatOpenAI(model=modelo, api_key=clave, temperature=0, timeout=LLM_TIMEOUT_S, max_retries=0)

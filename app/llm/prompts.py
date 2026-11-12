@@ -25,7 +25,9 @@ Si no hay brechas claras, indica qué conviene verificar en entrevista; no inven
 No calcules un porcentaje global: lo calcula Python con pesos explícitos.
 """
 
-prompt_cv = ChatPromptTemplate.from_messages([
-    ("system", SISTEMA),
-    ("human", "PUESTO (datos):\n{puesto}\n\nCV (datos):\n{cv}"),
-])
+prompt_cv = ChatPromptTemplate.from_messages(
+    [
+        ("system", SISTEMA),
+        ("human", "PUESTO (datos):\n{puesto}\n\nCV (datos):\n{cv}"),
+    ]
+)
