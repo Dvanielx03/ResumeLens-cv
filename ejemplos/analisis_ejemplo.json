@@ -1,0 +1,12 @@
+{
+  "resumen": "El CV ficticio documenta experiencia backend relacionada con el puesto. Aporta Python, APIs REST, PostgreSQL y pruebas; falta evidencia de AWS y de resultados medibles.",
+  "criterios": [
+    {"codigo":"experiencia","aplica":true,"puntuacion":90,"requisito":"3 anos desarrollando servicios web.","justificacion":"El CV declara tres anos en aplicaciones web y trabajo con APIs; conviene detallar fechas y alcance.","evidencias":["Desarrollador Python con 3 anos de experiencia en aplicaciones web."]},
+    {"codigo":"habilidades","aplica":true,"puntuacion":85,"requisito":"Python, REST, PostgreSQL, Git y pytest; AWS deseable.","justificacion":"Las tecnologias principales estan documentadas. AWS no figura como experiencia demostrada.","evidencias":["Desarrollo de APIs REST con Python y FastAPI.","Pruebas automatizadas con pytest y control de versiones con Git."]},
+    {"codigo":"formacion","aplica":true,"puntuacion":100,"requisito":"Estudios tecnicos o tecnologicos en desarrollo de software.","justificacion":"La formacion declarada corresponde al nivel solicitado.","evidencias":["Tecnologia en Desarrollo de Software."]},
+    {"codigo":"responsabilidades","aplica":true,"puntuacion":80,"requisito":"Mantener servicios, documentar APIs y escribir pruebas.","justificacion":"Se mencionan mantenimiento, documentacion y pruebas; faltan resultados cuantificados.","evidencias":["mantenimiento de servicios y documentacion de APIs.","Pruebas automatizadas con pytest"]}
+  ],
+  "fortalezas":["El CV documenta Python, FastAPI, PostgreSQL y pruebas con pytest.","La formacion declarada corresponde al requisito del puesto."],
+  "brechas":["No se aporta evidencia de experiencia con AWS, que es deseable.","No se incluyen resultados cuantificados de los proyectos."],
+  "siguientes_pasos":["Anadir fechas, responsabilidades y alcance de cada experiencia.","Describir impacto medible de las APIs sin inventar cifras.","Si existe experiencia real con AWS, incorporarla con un proyecto verificable."]
+}

@@ -1,0 +1,6 @@
+Puesto: Desarrollador Python backend.
+Se solicitan 3 anos de experiencia desarrollando servicios web.
+Habilidades: Python, APIs REST, PostgreSQL, Git y pruebas con pytest.
+Formacion: estudios tecnicos o tecnologicos en desarrollo de software.
+Responsabilidades: mantener servicios, documentar APIs y escribir pruebas.
+Deseable: Docker y conocimientos de AWS.

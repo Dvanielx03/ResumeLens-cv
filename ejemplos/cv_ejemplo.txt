@@ -1,0 +1,10 @@
+PERFIL DE DEMOSTRACION — DATOS FICTICIOS
+Desarrollador Python con 3 anos de experiencia en aplicaciones web.
+Experiencia: Desarrollo de APIs REST con Python y FastAPI.
+Diseno de consultas SQL y mantenimiento de bases de datos PostgreSQL.
+Pruebas automatizadas con pytest y control de versiones con Git.
+Despliegue de aplicaciones con Docker en entornos de desarrollo.
+Formacion: Tecnologia en Desarrollo de Software.
+Responsabilidades: mantenimiento de servicios y documentacion de APIs.
+Proyecto de demostracion: servicio de inventario con endpoints y pruebas unitarias.
+No se documentan experiencia con AWS ni metricas cuantitativas de impacto.
