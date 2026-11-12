@@ -9,15 +9,33 @@
 [![LangChain](https://img.shields.io/badge/IA-LangChain-17624D?style=flat-square)](https://docs.langchain.com/oss/python/langchain/models)
 [![Tests](https://github.com/Dvanielx03/ResumeLens-cv/actions/workflows/tests.yml/badge.svg)](https://github.com/Dvanielx03/ResumeLens-cv/actions/workflows/tests.yml)
 
-**Un CV. Un puesto. Un análisis que explica sus razones.**
+**Analiza tu CV frente al puesto que quieres conseguir.**
 
-[Empezar](#en-marcha) · [Cómo funciona](#del-documento-al-feedback) · [Evidencias](#probado-en-el-navegador) · [Arquitectura](#estructura)
+[Vista previa](#vista-previa) · [Características](#lo-que-puedes-hacer) · [Empezar](#en-marcha) · [LangChain](#del-documento-al-feedback) · [Arquitectura](#estructura) · [Pruebas](#probado-en-el-navegador)
+
+<br />
+
+<img src="docs/evidencias/02-resultado.png" width="100%" alt="Captura real de Playwright: ResumeLens muestra el ejemplo ficticio de 89%, sus criterios y las evidencias del CV" />
+
+<sub>Captura real con Playwright · Ejemplo ficticio sin API · Resultado explicado por criterios</sub>
 
 </div>
+
+---
+
+## Del CV a una decisión informada
+
+**¿Qué demuestra tu hoja de vida sobre el puesto al que quieres aplicar?**
 
 ResumeLens compara una hoja de vida con el puesto que tú describes. Extrae el texto del CV, utiliza LangChain para analizarlo con Gemini u OpenAI y devuelve un **ajuste documental de 0 a 100**, con evidencias, fortalezas, brechas y próximos pasos.
 
 La aplicación mantiene una estructura por capas sencilla, adaptada de Garaje: **presentación, servicios, dominio e integración con el modelo**. Sin cuentas, base de datos ni servicios adicionales.
+
+| 01 · Contexto | 02 · Evidencia | 03 · Siguiente paso |
+| :--- | :--- | :--- |
+| Tú defines el puesto y sus requisitos. | El análisis contrasta el CV con citas verificables. | Recibes un porcentaje explicado y mejoras concretas. |
+
+---
 
 ## Lo que puedes hacer
 
@@ -26,6 +44,26 @@ La aplicación mantiene una estructura por capas sencilla, adaptada de Garaje: *
 | Describir requisitos y responsabilidades del puesto. | Revisar un porcentaje con cuatro criterios y pesos visibles. | Descargar un informe Markdown con feedback y citas. |
 | Subir un PDF con texto seleccionable o un TXT UTF-8. | Ver qué evidencia del CV respalda cada criterio. | Mejorar el documento con siguientes pasos concretos. |
 | Elegir proveedor, modelo y API key. | Probar un ejemplo ficticio sin consumir API. | Limpiar el análisis y empezar otro. |
+
+## Vista previa
+
+| Prepara el análisis | Comprueba el documento |
+| :---: | :---: |
+| ![Inicio de ResumeLens](docs/evidencias/01-inicio.png) | ![PDF extraído y validación de API key](docs/evidencias/03-pdf-y-validacion.png) |
+| Contexto del puesto, carga del CV y motor de IA. | Texto leído y validaciones antes de llamar al proveedor. |
+
+<details>
+<summary>Ver la experiencia móvil · 390 px</summary>
+
+<br />
+
+<img src="docs/evidencias/04-movil.png" width="390" alt="Resultado del ejemplo en viewport móvil emulado con Playwright" />
+
+Emulación de navegador, no prueba en celular físico.
+
+</details>
+
+---
 
 ## En marcha
 
@@ -75,6 +113,8 @@ python -m streamlit run app/app.py --server.port=8503
 
 Usa Python **3.12**. Las dependencias están fijadas en `requirements.txt`; `.env` se carga con `python-dotenv`.
 
+---
+
 ## Del documento al feedback
 
 ```mermaid
@@ -90,6 +130,18 @@ flowchart LR
 La integración usa `RunnableLambda`, `ChatPromptTemplate` y `with_structured_output(AnalisisCV)`. La ruta de ejecución separa preparación, invocación y validación para controlar fallos y permitir **una reparación** de esquema o de citas. Los timeouts, HTTP 429 transitorios y errores 5xx permiten hasta dos reintentos; la cuota diaria agotada no se reintenta. La espera del llamador tiene un plazo total de 90 segundos. Una llamada ya iniciada no puede cancelarse por la fuerza; su resultado tardío se descarta.
 
 **El modelo valora la evidencia; Python calcula el porcentaje.** No se utilizan agentes autónomos, búsquedas web, base vectorial ni RAG. El texto del CV y el puesto se incluyen directamente en el contexto.
+
+### Dónde está cada paso
+
+| Responsabilidad | Archivo |
+| :--- | :--- |
+| Recoger el puesto, el CV y mostrar el resultado | [`ui/vista.py`](app/ui/vista.py) |
+| Extraer texto y validar el documento | [`services/documentos.py`](app/services/documentos.py) |
+| Preparar el contexto, ejecutar y validar con LangChain | [`services/evaluacion.py`](app/services/evaluacion.py) |
+| Definir las instrucciones y los roles del prompt | [`llm/prompts.py`](app/llm/prompts.py) |
+| Seleccionar Gemini u OpenAI mediante Factory | [`llm/proveedores.py`](app/llm/proveedores.py) |
+| Validar criterios y calcular el porcentaje | [`domain/modelos.py`](app/domain/modelos.py) |
+| Generar el informe descargable | [`services/informe.py`](app/services/informe.py) |
 
 ### Qué significa el porcentaje
 
@@ -111,28 +163,13 @@ Se redondea al entero más cercano, con los medios hacia arriba. En el ejemplo f
 > [!NOTE]
 > El porcentaje mide ajuste documental según el contexto y la valoración del modelo. No es una probabilidad de contratación, una certificación de capacidades ni una recomendación automática de contratar o descartar. Una brecha indica que falta evidencia en el CV presentado.
 
+---
+
 ## Probado en el navegador
 
 Capturas reales de **Chromium con Playwright contra el contenedor Docker**, el 11 de noviembre de 2026, hora de Bogotá. Se utilizaron exclusivamente datos ficticios.
 
-<img src="docs/evidencias/02-resultado.png" width="100%" alt="Resultado real de la interfaz: ejemplo ficticio de 89%, criterios y evidencia documental" />
-
-<details>
-<summary>Ver inicio, carga de PDF y vista móvil</summary>
-
-**Inicio**
-
-![Formulario inicial](docs/evidencias/01-inicio.png)
-
-**PDF extraído y mensaje de API key ausente**
-
-![Carga de un PDF y validación de configuración](docs/evidencias/03-pdf-y-validacion.png)
-
-**Resultado a 390 px — emulación, no celular físico**
-
-<img src="docs/evidencias/04-movil.png" width="390" alt="Resultado en viewport móvil de 390 píxeles, sin recorte del porcentaje" />
-
-</details>
+La captura principal y la galería de [vista previa](#vista-previa) corresponden a estas comprobaciones.
 
 | Comprobación | Resultado observado |
 | --- | --- |
@@ -150,6 +187,8 @@ Capturas reales de **Chromium con Playwright contra el contenedor Docker**, el 1
 > La evidencia del 89% corresponde al **ejemplo predefinido con un modelo falso**, que recorre la cadena LangChain y sus validaciones. No es una respuesta de Gemini/OpenAI. No había una API key configurada durante la auditoría: la evaluación generativa real queda pendiente de probar con una clave y cuota válidas. Los adaptadores de ambos proveedores se construyeron correctamente, sin hacer llamadas externas.
 
 Detalle y reproducción en [docs/registro_pruebas.md](docs/registro_pruebas.md).
+
+---
 
 ## Estructura
 
@@ -194,6 +233,8 @@ docker run --rm resumelens-tests
 ```
 
 La CI ejecuta lint y pytest con Python 3.12, sin secretos y sin llamadas a proveedores. Las dependencias directas se declaran en `requirements.in`; los archivos `.txt` fijan también las transitivas.
+
+---
 
 ## Límites y privacidad
 
